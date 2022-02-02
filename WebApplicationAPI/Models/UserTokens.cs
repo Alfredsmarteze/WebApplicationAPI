@@ -1,7 +1,7 @@
 ﻿namespace WebApplication.Models
 {
     public class UserTokens
-    {
+    {public int Id { get; set; }
         public string? Token
         {
             get;
@@ -11,6 +11,10 @@
         {
             get;
             set;
+        }
+        public string? Password
+        {
+            get;set;
         }
         public TimeSpan Validaty
         {
@@ -22,11 +26,7 @@
             get;
             set;
         }
-        public Guid Id
-        {
-            get;
-            set;
-        }
+      
         public string? EmailId
         {
             get;

@@ -1,9 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using WebApplication.Context;
 using WebApplication.Extensions;
 var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
-//var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("Connection");
 // Add services to the container.
 builder.Services.AddJWTTokenServices(builder.Configuration);
+
+builder.Services.AddDbContext<ModelContext>(x => x.UseSqlServer(connectionString));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -25,11 +29,13 @@ builder.Services.AddSwaggerGen(options => {
                     Reference = new Microsoft.OpenApi.Models.OpenApiReference {
                         Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
                             Id = "Bearer"
+                           
                     }
-                },
-                new string[] {}
+            },
+            new string[] {}
         }
     });
+    
 });
 
 var app = builder.Build();
