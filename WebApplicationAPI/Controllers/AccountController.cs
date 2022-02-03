@@ -79,7 +79,7 @@ namespace WebApplication.Controllers
         [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult GetList()
         {
-            var get=_context.users.ToList().AsQueryable();    
+            var get = _context.userTokens.ToList().AsReadOnly();//.AsQueryable().FirstOrDefault(s=>s.Id==1006);    
             return Ok(get);
             //return Ok(logins);
         }
